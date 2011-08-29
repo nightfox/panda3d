@@ -1,3 +1,18 @@
+
+# IT426 Assignment 2
+#
+# A python program which demonstartes the animation of 3 dinosaurs in an environment. 
+# T-rex is running around a rock
+# A baby dinosaur is jumping around
+# another big dinosaur is roaring
+#
+# Written by Anirvan Mandal
+# August 2011
+# 
+# Compile with python 2.6 
+# Panda 3D game engine ver. 1.7.2 required
+#
+
 from direct.showbase.ShowBase import ShowBase
 from direct.actor.Actor import Actor
 from panda3d.core import Vec3
@@ -8,33 +23,34 @@ from direct.interval.IntervalGlobal import Sequence
 class Application(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
-        base.disableMouse()
+        base.disableMouse()#mouse disabled
+        #rocky terrain load
         self.environ=loader.loadModel("models/environment")
         self.environ.reparentTo(render)
         self.environ.setScale(0.15,0.15,0.15)
         self.environ.setPos(0,-10,0)
-        
+        #loading the sky background
         self.sky=loader.loadModel("models/farmsky")
         self.sky.reparentTo(render)
         self.sky.setScale(0.3,0.3,0.3)
         self.sky.setPos(0,350,0)
+        #baby dinosaur model
         self.babyd = Actor("babyd", {"sit": "babydani"})
         self.babyd.reparentTo(render)
         self.babyd.setPos(Vec3(25,-150, 3))
         self.babyd.loop("sit")
-        
+        #big dinosaur model
         self.bigd = Actor("bigd", {"roar": "bigdani"})
         self.bigd.reparentTo(render)
         self.bigd.setPos(Vec3(30, -110, 0))
         self.bigd.loop("roar")
-        
+        #trex model
         self.trex = Actor("trex", {"run": "trex-eat"})
         self.trex.reparentTo(render)
-        #self.trex.setPos(Vec3(-10, 0, 0))
         self.trex.loop("run")
         self.trex.setHpr(270,0,0)
         self.cam.setPos(-20, -200, 22)
-         
+         #trex animation
         trexPosInterval1 = self.trex.posInterval(3,
                                                         Point3(-60,-120, 0),
                                                         startPos = Point3( -10,-120, 0))
